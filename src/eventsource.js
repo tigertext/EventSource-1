@@ -607,7 +607,7 @@ module.exports = (function () {
     this.timeout = 0;
     if (this.currentState !== WAITING) {
       if (!this.wasActivity) {
-        throwError(new Error("No activity within " + this.heartbeatTimeout + " milliseconds. Reconnecting."));
+        console.log("EventSource: No activity within " + this.heartbeatTimeout + " milliseconds. Reconnecting.");
         this.transport.cancel();
       } else {
         this.wasActivity = false;
