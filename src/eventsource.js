@@ -7,7 +7,7 @@
 /*jslint indent: 2, vars: true, plusplus: true */
 /*global setTimeout, clearTimeout */
 
-(function (global) {
+module.exports = (function () {
   "use strict";
 
   var setTimeout = global.setTimeout;
@@ -16,8 +16,8 @@
   var k = function () {
   };
 
-  function XHRTransport(xhr, onStartCallback, onProgressCallback, onFinishCallback, thisArg) {
-    this._internal = new XHRTransportInternal(xhr, onStartCallback, onProgressCallback, onFinishCallback, thisArg);
+  function XHRTransport(xhr, onStartCallback, onProgressCallback, onFinishCallback, thisArg, options) {
+    this._internal = new XHRTransportInternal(xhr, onStartCallback, onProgressCallback, onFinishCallback, thisArg, options);
   }
 
   XHRTransport.prototype.open = function (url, withCredentials) {
@@ -28,7 +28,7 @@
     this._internal.cancel();
   };
 
-  function XHRTransportInternal(xhr, onStartCallback, onProgressCallback, onFinishCallback, thisArg) {
+  function XHRTransportInternal(xhr, onStartCallback, onProgressCallback, onFinishCallback, thisArg, options) {
     this.onStartCallback = onStartCallback;
     this.onProgressCallback = onProgressCallback;
     this.onFinishCallback = onFinishCallback;
@@ -40,6 +40,7 @@
     this.url = "";
     this.withCredentials = false;
     this.timeout = 0;
+    this.options = options;
   }
 
   XHRTransportInternal.prototype.onStart = function () {
@@ -240,6 +241,14 @@
       // https://bugzilla.mozilla.org/show_bug.cgi?id=428916
       //this.xhr.setRequestHeader("Cache-Control", "no-cache");
       this.xhr.setRequestHeader("Accept", "text/event-stream");
+      if (this.options && this.options.headers) {
+        for (var headerName in this.options.headers) {
+          var headerValue = this.options.headers[headerName];
+          if (Object.prototype.hasOwnProperty.call(this.options.headers, headerName)) {
+            this.xhr.setRequestHeader(headerName, headerValue);
+          }
+        }
+      }
       // Request header field Last-Event-ID is not allowed by Access-Control-Allow-Headers.
       //this.xhr.setRequestHeader("Last-Event-ID", this.lastEventId);
     }
@@ -437,7 +446,7 @@
     this.wasActivity = false;
     var CurrentTransport = options != undefined && options.Transport != undefined ? options.Transport : Transport;
     var xhr = new CurrentTransport();
-    this.transport = new XHRTransport(xhr, this.onStart, this.onProgress, this.onFinish, this);
+    this.transport = new XHRTransport(xhr, this.onStart, this.onProgress, this.onFinish, this, options);
     this.timeout = 0;
     this.currentState = WAITING;
     this.dataBuffer = [];
@@ -683,4 +692,6 @@
     global.EventSource = EventSource;
   }
 
-}(typeof window !== 'undefined' ? window : this));
+  return EventSource;
+
+}());
