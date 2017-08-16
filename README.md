@@ -16,6 +16,12 @@ bower install event-source-polyfill
 
 Just include `src/eventsource.js` or `src/eventsource.min.js` in your page to use the polyfill.
 
+Changes in tt-event-source-polyfill fork:
+-----------------------------------------
+
+* When we reestablish the connection, log a message instead of throwing an error
+
+Original project: https://github.com/Yaffle/EventSource
 
 Ionic2/Angular2 Installation:
 -----------------------------
