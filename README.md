@@ -16,6 +16,13 @@ bower install event-source-polyfill
 
 Just include `src/eventsource.js` or `src/eventsource.min.js` in your page to use the polyfill.
 
+Changes in tt-event-source-polyfill fork:
+-----------------------------------------
+
+* Provide the polyfill as an export for easier npm compatibility
+* When we reestablish the connection, log a message instead of throwing an error
+
+Original project: https://github.com/Yaffle/EventSource
 
 Browser support:
 ----------------
@@ -51,6 +58,16 @@ Build:
 Notes:
 -----
  * If you are using HTTP Basic Authentication, you can embed credentials into the URL - `http://username:password@github.com`.
+
+Custom Headers:
+---------------
+```
+var es = new EventSourcePolyfill('/events', {
+  headers: {
+    'X-Custom-Header': 'value'
+  }
+});
+```
 
 Other EventSource polyfills:
 ----------------------------

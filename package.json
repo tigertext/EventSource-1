@@ -1,6 +1,6 @@
 {
-  "name": "event-source-polyfill",
-  "version": "0.0.9",
+  "name": "tt-event-source-polyfill",
+  "version": "0.0.9-tt1",
   "description": "A polyfill for http://www.w3.org/TR/eventsource/ ",
   "main": "src/eventsource.js",
   "scripts": {
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/Yaffle/EventSource.git"
+    "url": "git://github.com/tigertext/EventSource.git"
   },
   "keywords": [
     "sse",
@@ -22,7 +22,7 @@
   "bugs": {
     "url": "https://github.com/Yaffle/EventSource/issues"
   },
-  "homepage": "https://github.com/Yaffle/EventSource",
+  "homepage": "https://github.com/tigertext/EventSource",
   "devDependencies": {
     "grunt": "^0.4.4",
     "grunt-cli": "^0.1.13",
