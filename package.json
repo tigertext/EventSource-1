@@ -1,6 +1,6 @@
 {
   "name": "tt-event-source-polyfill",
-  "version": "0.0.12",
+  "version": "0.0.12-tt1",
   "description": "A polyfill for http://www.w3.org/TR/eventsource/ ",
   "main": "src/eventsource.js",
   "scripts": {
