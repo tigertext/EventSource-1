@@ -587,7 +587,7 @@
 
       if (currentState !== WAITING) {
         if (!wasActivity) {
-          throwError(new Error("No activity within " + heartbeatTimeout + " milliseconds. Reconnecting."));
+          console.log("No activity within " + heartbeatTimeout + " milliseconds. Reconnecting.");
           transport.cancel();
         } else {
           wasActivity = false;
