@@ -457,6 +457,8 @@
           throwError(new Error(message));
           close();
           var event = new Event("error");
+          event.status = status
+          event.statusText = statusText
           es.dispatchEvent(event);
           fire(es, es.onerror, event);
         }

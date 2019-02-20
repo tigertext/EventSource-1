@@ -20,6 +20,7 @@ Changes in tt-event-source-polyfill fork:
 -----------------------------------------
 
 * When we reestablish the connection, log a message instead of throwing an error
+* When calling onError on an XHR error, provide err.status and err.statusText
 
 Original project: https://github.com/Yaffle/EventSource
 
